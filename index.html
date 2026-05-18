@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║          Nissih Buctuan — Portfolio (Standalone HTML)        ║
+║                                                              ║
+║  HOW TO PERSONALISE THIS FILE                                ║
+║  ────────────────────────────                                ║
+║  • Profile photo  →  replace "me.jpg" in the same folder    ║
+║  • Resume / CV    →  place "resume.pdf" in the same folder   ║
+║                       (see the RESUME MODAL section below)   ║
+║  • Project images →  put PNG/JPG files in an images/ folder  ║
+║                       and update the src="..." attributes    ║
+║  • Personal data  →  search for "EDIT:" comments below       ║
+║  • Colors         →  edit the :root { } CSS variables        ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+<!-- EDIT: Page title shown in browser tab -->
+<title>Nissih Buctuan | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- ═══════════════════════════════════
+     All styles are in style.css
+     If you want one file only, move the
+     contents of style.css into a <style>
+     tag here.
+═══════════════════════════════════ -->
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="bg-atmosphere" aria-hidden="true">
+  <div class="bg-atmosphere__blob bg-atmosphere__blob--a"></div>
+  <div class="bg-atmosphere__blob bg-atmosphere__blob--b"></div>
+  <div class="bg-atmosphere__blob bg-atmosphere__blob--c"></div>
+  <div class="bg-atmosphere__mesh"></div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PRELOADER — shown while page loads
+════════════════════════════════════════════ -->
+<!-- PRELOADER — shown while page loads -->
+<div id="preloader">
+  <h1 class="grad-text">Nissih Buctuan</h1>
+  <div id="pre-bar-wrap"><div id="pre-bar"></div></div>
+  <p id="pre-pct">0%</p>
+  <!-- Bible verse shown on loading screen -->
+  <div id="pre-quote">
+    <p>&#8220;Whatever you ask in prayer, believe that you have received it, and it will be yours.&#8221;</p>
+    <cite>Mark 11:24</cite>
+  </div>
+</div>
+
+<!-- ════════════════ NAVBAR ════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo grad-text" href="#home">NB</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#workspace">Workspace</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme">☀️</button>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a>
+  <a href="#experience">Experience</a><a href="#skills">Skills</a>
+  <a href="#workspace">Workspace</a><a href="#contact">Contact</a>
+</div>
+
+
+
+<!-- ════════════════ HERO ════════════════ -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <canvas id="particle-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-text fade-in">
+      <p class="hero-greeting">Hi, I'm</p>
+      <h1 class="hero-name-heading"><span class="grad-text">Nissih Buctuan</span></h1>
+      <div class="typing-wrap"><span id="typing-text"></span><span class="cursor">|</span></div>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View Works</a>
+        <a href="#contact"  class="btn btn-secondary">Contact Me</a>
+        <button class="btn btn-secondary" onclick="openResume()" style="gap:.5rem">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          My Resume
+        </button>
+      </div>
+    </div>
+    <!-- Hero image with animated ring, glow, and floating badges -->
+    <div class="hero-img-wrap">
+      <div class="hero-blob">
+
+        <!-- Soft glow behind portrait (circular) -->
+        <div class="hero-blob-glow"></div>
+
+        <!-- Dashed circles around the portrait -->
+        <svg class="hero-ring-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="#3b82f6"/>
+              <stop offset="50%"  stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#ec4899"/>
+            </linearGradient>
+          </defs>
+          <circle class="hero-ring-svg__r hero-ring-svg__r--outer" cx="110" cy="110" r="104" fill="none"
+                  stroke="url(#ring-grad)" stroke-width="2.5"
+                  stroke-dasharray="16 8" stroke-linecap="round"/>
+          <circle class="hero-ring-svg__r hero-ring-svg__r--inner" cx="110" cy="110" r="94" fill="none"
+                  stroke="url(#ring-grad)" stroke-width="1"
+                  stroke-dasharray="12 14" stroke-linecap="round"
+                  opacity="0.45"/>
+        </svg>
+
+        <!-- Circular profile + gradient ring -->
+        <div class="hero-blob-border">
+          <div class="hero-blob-inner">
+            <img src="me.jpg" alt="Nissih Buctuan"
+                 onerror="this.style.display='none';
+                          this.parentNode.style.background='linear-gradient(135deg,#3b82f6,#8b5cf6)'"/>
+          </div>
+        </div>
+
+        <!-- Floating skill badge — top right -->
+        <div class="hero-badge hero-badge--tr">
+          <span class="hero-badge-dot" style="background:#3b82f6"></span>
+          Video Editor
+        </div>
+
+        <!-- Floating skill badge — bottom left -->
+        <div class="hero-badge hero-badge--bl">
+          <span class="hero-badge-dot" style="background:#ec4899"></span>
+          Graphic Designer
+        </div>
+
+        <!-- Floating status badge — bottom right -->
+        <div class="hero-badge hero-badge--br">
+          <span class="hero-badge-dot" style="background:#22c55e;animation:ping 1s ease-out infinite"></span>
+          Open to Work
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="scroll-arrow">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </div>
+</section>
+
+
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-heading"><h2><span class="grad-text">About Me</span></h2><p>Passionate developer and designer crafting digital experiences</p></div>
+
+    <div class="about-grid fade-in">
+              <!-- About section profile image with decorative elements -->
+        <div class="about-img">
+          <!-- Decorative accent orbs -->
+          <div class="about-img-deco about-img-deco--tl"></div>
+          <div class="about-img-deco about-img-deco--br"></div>
+          <div class="about-img-inner">
+            <img src="me.jpg" alt="Nissih Buctuan"
+                 onerror="this.style.display='none';
+                          this.parentNode.style.background='linear-gradient(135deg,#3b82f6,#8b5cf6)'"/>
+            <!-- Overlay shimmer on hover -->
+            <div class="about-img-shimmer"></div>
+          </div>
+        </div>
+      <div class="about-info">
+        <div class="info-row">
+          <div class="info-icon"><!-- map-pin -->
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div><div class="info-label">Location</div><div class="info-val">Cantilan Surigao del Sur</div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><!-- graduation-cap -->
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div><div class="info-label">Education</div><div class="info-val">BS Computer Science, North Eatern Mindanao State University</div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><!-- mail -->
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+          </div>
+          <div><div class="info-label">Email</div><div class="info-val">nmcbuctuan@nemsu.edu.ph</div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><!-- phone -->
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+          </div>
+          <div><div class="info-label">Phone</div><div class="info-val">(+63) 954 237 3715</div></div>
+        </div>
+        <p class="about-bio">I’m a Computer Science student who enjoys working behind the scenes to help things run smoothly.Experience in content creation, social media management,ecommerce and administrative support, where I’vehandled scheduling posts, engaging with audiences, and keeping tasks organized.I’m comfortable using digital tools. Excited to support businesses in growing their online presence while providing dependable and organized executive assistance.</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+              <div class="stat-card glass" style="transition-delay:0.0s">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><<path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>/></svg>
+          <div class="stat-num grad-text" data-target="2" data-suffix="+">2+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card glass" style="transition-delay:0.12s">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><<path d="M6 9H4a2 2 0 000 4h2m12 0h2a2 2 0 000-4h-2"/><path d="M12 17v4"/><path d="M8 21h8"/><path d="M7 4h10l1 5a5 5 0 01-10 0z"/>/></svg>
+          <div class="stat-num grad-text" data-target="7" data-suffix="+">7+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-card glass" style="transition-delay:0.24s">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>/></svg>
+          <div class="stat-num grad-text" data-target="10" data-suffix="+">10+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-card glass" style="transition-delay:0.36s">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>/></svg>
+          <div class="stat-num grad-text" data-target="12" data-suffix="">12</div>
+          <div class="stat-label">Awards Won</div>
+        </div>
+
+    </div>
+
+    <!-- Timeline -->
+    <div class="fade-in">
+      <h3 class="journey-title">My Journey</h3>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-card-wrap">
+            <div class="tl-card glass">
+              <div class="tl-year">2018</div>
+              <div class="tl-title">Parang National High School</div>
+              <div class="tl-desc">Graduated Primary</div>
+            </div>
+          </div>
+          <div class="tl-dot"></div><div class="tl-space"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-card-wrap">
+            <div class="tl-card glass">
+              <div class="tl-year">2022</div>
+              <div class="tl-title">Parang National High School</div>
+              <div class="tl-desc">Graduated Secondary</div>
+            </div>
+          </div>
+          <div class="tl-dot"></div><div class="tl-space"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-card-wrap">
+            <div class="tl-card glass">
+              <div class="tl-year">2024</div>
+              <div class="tl-title">Cantilan National High School</div>
+              <div class="tl-desc">Graduated Senior High School</div>
+            </div>
+          </div>
+          <div class="tl-dot"></div><div class="tl-space"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-card-wrap">
+            <div class="tl-card glass">
+              <div class="tl-year">2024&ndash;2026</div>
+              <div class="tl-title">North Eastern Mindanao State University</div>
+              <div class="tl-desc">Associates Degree</div>
+            </div>
+          </div>
+          <div class="tl-dot"></div><div class="tl-space"></div>
+        </div>
+      </div>
+              <div class="tl-title"></div>
+              <div class="tl-desc"></div>
+            </div>
+          </div>
+          <div class="tl-dot"></div>
+          <div class="tl-space"></div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ════════════════ PROJECTS ════════════════ -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2><span class="grad-text">Featured Projects</span></h2>
+      <p>Hover a card to explore — scroll the strip to see more</p>
+    </div>
+
+    <div class="projects-panel">
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="All">All</button>
+        <button class="filter-btn" data-filter="HTML">HTML</button>
+        <button class="filter-btn" data-filter="Table">Table</button>
+      </div>
+
+      <!-- Simple horizontal scroll strip -->
+      <div class="hscroll-track" id="projTrack">
+        <div class="projects-grid" id="projectsGrid">
+
+          <div class="project-card" data-category="HTML" data-id="1"
+               data-title="Activity 1 - Student Poem"
+               data-desc="A personal introductory HTML page that displays a student profile image and an original Filipino poem titled Estudyante by Nissih Michaelah C. Buctuan. Uses basic HTML elements like headings, images, line breaks, and inline background styling in a centered layout."
+               data-img="images/P1.png" data-tags="HTML,Inline Styling,Typography"
+               data-live="1st_Activity.html" data-github="#">
+            <div class="proj-img-wrap">
+              <img src="images/P1.png" alt="Activity 1" loading="lazy"/>
+              <div class="proj-overlay">
+                <a href="1st_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
+                  <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-info">
+              <h3>Activity 1 - Student Poem</h3>
+              <p>A personal HTML page featuring a poem about student life with an image and styled text.</p>
+              <div class="tag-list"><span class="tag">HTML</span><span class="tag">Inline Styling</span><span class="tag">Typography</span></div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="HTML" data-id="2"
+               data-title="Activity 2 - Hobby Info Page"
+               data-desc="An HTML page about the hobby of playing guitar. Uses inline CSS for font families, colors, and background highlights."
+               data-img="images/P2.png" data-tags="HTML,CSS Styling,Text Formatting"
+               data-live="2nd_Activity.html" data-github="#">
+            <div class="proj-img-wrap">
+              <img src="images/P2.png" alt="Activity 2" loading="lazy"/>
+              <div class="proj-overlay">
+                <a href="2nd_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
+                  <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-info">
+              <h3>Activity 2 - Hobby Info Page</h3>
+              <p>A colorful info page about playing guitar using font, color, and background styling.</p>
+              <div class="tag-list"><span class="tag">HTML</span><span class="tag">CSS Styling</span><span class="tag">Text Formatting</span></div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="Table" data-id="3"
+               data-title="Activity 3 - Student Grade Report"
+               data-desc="A structured HTML table presenting a Student Grade Report across five subjects with Prelim, Midterm, and Final grades."
+               data-img="images/P3.png" data-tags="HTML,Tables,colspan"
+               data-live="3rd_Activity.html" data-github="#">
+            <div class="proj-img-wrap">
+              <img src="images/P3.png" alt="Activity 3" loading="lazy"/>
+              <div class="proj-overlay">
+                <a href="3rd_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
+                  <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-info">
+              <h3>Activity 3 - Student Grade Report</h3>
+              <p>An HTML table displaying subject grades, instructors, and remarks with average computation.</p>
+              <div class="tag-list"><span class="tag">HTML</span><span class="tag">Tables</span><span class="tag">colspan</span></div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="Table" data-id="4"
+               data-title="Activity 4 - Weekly Class Schedule"
+               data-desc="An HTML table representing a Weekly Class Schedule from Monday to Friday with time slots and subjects."
+               data-img="images/P4.png" data-tags="HTML,Tables,Schedule Layout"
+               data-live="4th_Activity.html" data-github="#">
+            <div class="proj-img-wrap">
+              <img src="images/P4.png" alt="Activity 4" loading="lazy"/>
+              <div class="proj-overlay">
+                <a href="4th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
+                  <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-info">
+              <h3>Activity 4 - Weekly Class Schedule</h3>
+              <p>A weekly timetable HTML table with time slots, subjects, and a lunch break row.</p>
+              <div class="tag-list"><span class="tag">HTML</span><span class="tag">Tables</span><span class="tag">Schedule Layout</span></div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="Table" data-id="5"
+               data-title="Activity 5 - Nested Tables"
+               data-desc="An HTML exercise demonstrating nested tables with tongue twister phrases inside table cells."
+               data-img="images/P5.png" data-tags="HTML,Nested Tables,Layout"
+               data-live="5th_Activity.html" data-github="#">
+            <div class="proj-img-wrap">
+              <img src="images/P5.png" alt="Activity 5" loading="lazy"/>
+              <div class="proj-overlay">
+                <a href="5th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
+                  <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-info">
+              <h3>Activity 5 - Nested Tables</h3>
+              <p>Nested HTML tables demonstrating tongue twister phrases inside table cells.</p>
+              <div class="tag-list"><span class="tag">HTML</span><span class="tag">Nested Tables</span><span class="tag">Layout</span></div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="Table" data-id="6"
+               data-title="Activity 6 - colspan and rowspan Layout"
+               data-desc="An HTML table demonstrating advanced table structure using both colspan and rowspan."
+               data-img="images/P6.png" data-tags="HTML,colspan,rowspan"
+               data-live="6th_Activity.html" data-github="#">
+            <div class="proj-img-wrap">
+              <img src="images/P6.png" alt="Activity 6" loading="lazy"/>
+              <div class="proj-overlay">
+                <a href="6th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
+                  <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-info">
+              <h3>Activity 6 - colspan and rowspan Layout</h3>
+              <p>An HTML table using colspan and rowspan to create a complex directional layout.</p>
+              <div class="tag-list"><span class="tag">HTML</span><span class="tag">colspan</span><span class="tag">rowspan</span></div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="HTML" data-id="7"
+               data-title="Activity 7 - HTML List Types"
+               data-desc="An HTML page demonstrating various list types including unordered and ordered lists with custom markers."
+               data-img="images/P7.png" data-tags="HTML,Lists,ul and ol"
+               data-live="7th_Activity.html" data-github="#">
+            <div class="proj-img-wrap">
+              <img src="images/P7.png" alt="Activity 7" loading="lazy"/>
+              <div class="proj-overlay">
+                <a href="7th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
+                  <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-info">
+              <h3>Activity 7 - HTML List Types</h3>
+              <p>A page showcasing all HTML list types: unordered, ordered, and custom markers.</p>
+              <div class="tag-list"><span class="tag">HTML</span><span class="tag">Lists</span><span class="tag">ul and ol</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /hscroll-track -->
+    </div><!-- /projects-panel -->
+  </div>
+</section>
+
+
+<!-- Project Modal -->
+<div class="modal-backdrop" id="projectModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="modal-img" src="" alt="" class="modal-img"/>
+    <h2 id="modal-title" class="grad-text" style="font-size:2rem;font-weight:700;margin-bottom:1rem"></h2>
+    <div id="modal-tags" class="modal-tags"></div>
+    <p id="modal-desc" class="modal-desc"></p>
+    <div class="modal-actions">
+
+      <!--
+      ╔══════════════════════════════════════════════════════════════╗
+      ║  HOW TO ADD A LIVE PREVIEW LINK FOR EACH ACTIVITY           ║
+      ║  ─────────────────────────────────────────────────────────  ║
+      ║  Each project card has a data-live="..." attribute.         ║
+      ║  Set it to the HTML filename you want to open:              ║
+      ║                                                              ║
+      ║    data-live="activity1.html"   ← opens activity1.html       ║
+      ║    data-live="activity2.html"   ← opens activity2.html       ║
+      ║                                                              ║
+      ║  The file must be in the SAME FOLDER as index.html.         ║
+      ║                                                              ║
+      ║  HOW TO ADD A PREVIEW IMAGE FOR EACH ACTIVITY               ║
+      ║  ─────────────────────────────────────────────────────────  ║
+      ║  Each project card has a data-img="..." attribute.          ║
+      ║  Set it to your image filename:                             ║
+      ║                                                              ║
+      ║    data-img="images/activity1.png"                          ║
+      ║                                                              ║
+      ║  Place your image in an images/ folder beside index.html.   ║
+      ╚══════════════════════════════════════════════════════════════╝
+      -->
+
+      <!-- "View Code" toggles the source code panel below -->
+      <button class="btn btn-secondary" id="toggleCodeBtn" onclick="toggleCode()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        View Code
+      </button>
+
+      <!-- "View Output" opens the actual HTML file in a new tab -->
+      <!-- The href is set dynamically from data-live by JavaScript -->
+      <a id="modalLiveBtn" href="#" target="_blank"
+         class="btn btn-primary modal-live-btn" style="text-decoration:none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        View Output
+      </a>
+
+    </div>
+    <div id="codeBlock" style="display:none;margin-top:1.5rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+        <span style="font-size:.85rem;font-weight:600;color:var(--text-tertiary)">HTML Source Code</span>
+        <button onclick="copyCode()" style="padding:.35rem .9rem;border-radius:.5rem;background:var(--accent-gradient);border:none;color:#fff;font-size:.8rem;font-weight:600;cursor:pointer" id="copyBtn">Copy</button>
+      </div>
+      <pre id="codeContent" style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:.75rem;padding:1.25rem;overflow-x:auto;font-size:.78rem;line-height:1.6;color:var(--text-secondary);white-space:pre;max-height:400px;overflow-y:auto"></pre>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ════════════════ EXPERIENCE ════════════════ -->
+<section id="experience" class="section">
+  <div class="container">
+    <div class="section-heading"><h2><span class="grad-text">Experience</span></h2><p>My professional journey and achievements</p></div>
+    <div class="exp-grid">
+            <div class="exp-card glass" style="transition-delay:0.0s">
+        <div class="exp-header">
+          <div class="exp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
+              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="exp-role">Graphic Designer</div>
+            <div class="exp-meta">
+              <span class="exp-company">Tech Innovations Inc.</span>
+              <span class="exp-duration">2020 - Present</span>
+            </div>
+          </div>
+        </div>
+        <div class="star-row"><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star empty" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star empty" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="exp-desc">Leading development of enterprise web apps and mentoring junior developers.</p>
+        <div class="skill-bar-list"><div class="skill-bar-item"><div class="skill-bar-top"><span>Creativity</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95"></div></div></div><div class="skill-bar-item"><div class="skill-bar-top"><span>Typography</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div><div class="skill-bar-item"><div class="skill-bar-top"><span>Attention to  detail</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div></div>
+      </div>
+      <div class="exp-card glass" style="transition-delay:0.12s">
+        <div class="exp-header">
+          <div class="exp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
+              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="exp-role">UI/UX Designer &amp; Developer</div>
+            <div class="exp-meta">
+              <span class="exp-company">Creative Studio</span>
+              <span class="exp-duration">Present</span>
+            </div>
+          </div>
+        </div>
+        <div class="star-row"><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="exp-desc">Designed and developed interfaces for mobile and web, ran user research.</p>
+        <div class="skill-bar-list"><div class="skill-bar-item"><div class="skill-bar-top"><span>Figma</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div></div><div class="skill-bar-item"><div class="skill-bar-top"><span>React Native</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div><div class="skill-bar-item"><div class="skill-bar-top"><span>Design Systems</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div></div>
+      </div>
+      <div class="exp-card glass" style="transition-delay:0.24s">
+        <div class="exp-header">
+          <div class="exp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
+              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="exp-role">Video Editor</div>
+            <div class="exp-meta">
+              <span class="exp-company">Limitless</span>
+              <span class="exp-duration">2025-Present</span>
+            </div>
+          </div>
+        </div>
+        <div class="star-row"><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="star empty" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="exp-desc">Built responsive web apps and modern frontend architectures.</p>
+        <div class="skill-bar-list"><div class="skill-bar-item"><div class="skill-bar-top"><span>Faceless Video</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div><div class="skill-bar-item"><div class="skill-bar-top"><span>Short Clips</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div><div class="skill-bar-item"><div class="skill-bar-top"><span>Promotional Video</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ════════════════ SKILLS ════════════════ -->
+<section id="skills" class="section">
+  <div class="container">
+    <div class="section-heading"><h2><span class="grad-text">Skills & Expertise</span></h2><p>Technical proficiencies and professional competencies</p></div>
+    <div class="skills-grid">
+            <div class="skill-cat glass" style="transition-delay:0.0s">
+        <div class="skill-cat-title grad-text">Video Editing</div>
+        <div class="skill-row"><div class="skill-row-top"><span>Faceless</span><span class="skill-pct">95%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="95"></div></div></div><div class="skill-row"><div class="skill-row-top"><span>Short Videos</span><span class="skill-pct">90%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="90"></div></div></div><div class="skill-row"><div class="skill-row-top"><span>Promotional Videos</span><span class="skill-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="80"></div></div></div>
+      </div>
+      <div class="skill-cat glass" style="transition-delay:0.15s">
+        <div class="skill-cat-title grad-text">Graphic Designing</div>
+        <div class="skill-row"><div class="skill-row-top"><span>Infographics</span><span class="skill-pct">100%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="100"></div></div></div><div class="skill-row"><div class="skill-row-top"><span>Brochure and Flyers Design</span><span class="skill-pct">90%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="90"></div></div></div><div class="skill-row"><div class="skill-row-top"><span>Logo Designing</span><span class="skill-pct">82%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="82"></div></div></div>
+      </div>
+      <div class="skill-cat glass" style="transition-delay:0.3s">
+        <div class="skill-cat-title grad-text">Programming/Coding</div>
+        <div class="skill-row"><div class="skill-row-top"><span>Frontend Development</span><span class="skill-pct">90%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="90"></div></div></div><div class="skill-row"><div class="skill-row-top"><span>Responsive Web Design</span><span class="skill-pct">90%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="90"></div></div></div><div class="skill-row"><div class="skill-row-top"><span>Web Development</span><span class="skill-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-prog" data-width="80"></div></div></div>
+      </div>
+
+      </div>
+      
+    </div>
+
+    <!-- Soft Skills -->
+    <div class="soft-skills-box glass">
+      <div class="soft-blob1"></div><div class="soft-blob2"></div>
+      <h3 class="soft-heading grad-text">Soft Skills Analysis</h3>
+      <p class="soft-sub">Beyond the code — what I bring to the team</p>
+            <div class="soft-grid">
+        <!-- Problem Solving skill card -->
+        <div class="soft-card" style="transition-delay:0.0s">
+          <div class="soft-float" style="animation-duration:2.4s;animation-delay:0.0s">
+            <div class="radial-wrap">
+
+              <!-- Spinning orbit ring 1 -->
+              <div class="orbit" style="animation-duration:14s">
+                <div class="orbit-dot" style="background:#3b82f6;box-shadow:0 0 10px #3b82f6"></div>
+              </div>
+              <!-- Spinning orbit ring 2 (counter-rotate) -->
+              <div class="orbit orbit2" style="animation-duration:18s">
+                <div class="orbit-dot" style="background:#3b82f6;width:.4rem;height:.4rem;opacity:.7"></div>
+              </div>
+
+              <!-- Glowing aura behind the circle -->
+              <div style="position:absolute;inset:0;border-radius:50%;background:#3b82f6;
+                          filter:blur(1.5rem);opacity:0.15;
+                          animation:pulse-aura 3s ease-in-out infinite;
+                          animation-delay:0.0s;pointer-events:none"></div>
+
+              <!-- Radial progress SVG -->
+              <svg class="radial-svg" width="160" height="160" viewBox="0 0 100 100">
+                <circle class="radial-bg" cx="50" cy="50" r="45"/>
+                <circle class="radial-fill" cx="50" cy="50" r="45"
+                  stroke="#3b82f6"
+                  data-offset="14.15"
+                  style="stroke-dashoffset:283.0"/>
+              </svg>
+
+              <!-- Icon + percentage in the center -->
+              <div class="radial-center">
+                <div class="radial-icon-wrap" style="background:#3b82f6">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#fff"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>/>
+                  </svg>
+                </div>
+                <div class="radial-pct grad-text" data-target="95">0%</div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Skill name and description below the circle -->
+          <div class="soft-name">Problem Solving</div>
+          <div class="soft-desc">Analytical thinking & creative solutions</div>
+        </div>
+        <!-- Communication skill card -->
+        <div class="soft-card" style="transition-delay:0.2s">
+          <div class="soft-float" style="animation-duration:2.7s;animation-delay:0.5s">
+            <div class="radial-wrap">
+
+              <!-- Spinning orbit ring 1 -->
+              <div class="orbit" style="animation-duration:16s">
+                <div class="orbit-dot" style="background:#8b5cf6;box-shadow:0 0 10px #8b5cf6"></div>
+              </div>
+              <!-- Spinning orbit ring 2 (counter-rotate) -->
+              <div class="orbit orbit2" style="animation-duration:20s">
+                <div class="orbit-dot" style="background:#8b5cf6;width:.4rem;height:.4rem;opacity:.7"></div>
+              </div>
+
+              <!-- Glowing aura behind the circle -->
+              <div style="position:absolute;inset:0;border-radius:50%;background:#8b5cf6;
+                          filter:blur(1.5rem);opacity:0.15;
+                          animation:pulse-aura 3s ease-in-out infinite;
+                          animation-delay:0.7s;pointer-events:none"></div>
+
+              <!-- Radial progress SVG -->
+              <svg class="radial-svg" width="160" height="160" viewBox="0 0 100 100">
+                <circle class="radial-bg" cx="50" cy="50" r="45"/>
+                <circle class="radial-fill" cx="50" cy="50" r="45"
+                  stroke="#8b5cf6"
+                  data-offset="33.96"
+                  style="stroke-dashoffset:283.0"/>
+              </svg>
+
+              <!-- Icon + percentage in the center -->
+              <div class="radial-center">
+                <div class="radial-icon-wrap" style="background:#8b5cf6">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#fff"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>/>
+                  </svg>
+                </div>
+                <div class="radial-pct grad-text" data-target="88">0%</div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Skill name and description below the circle -->
+          <div class="soft-name">Communication</div>
+          <div class="soft-desc">Clear, empathetic collaboration</div>
+        </div>
+        <!-- Leadership skill card -->
+        <div class="soft-card" style="transition-delay:0.4s">
+          <div class="soft-float" style="animation-duration:3.0s;animation-delay:1.0s">
+            <div class="radial-wrap">
+
+              <!-- Spinning orbit ring 1 -->
+              <div class="orbit" style="animation-duration:18s">
+                <div class="orbit-dot" style="background:#ec4899;box-shadow:0 0 10px #ec4899"></div>
+              </div>
+              <!-- Spinning orbit ring 2 (counter-rotate) -->
+              <div class="orbit orbit2" style="animation-duration:22s">
+                <div class="orbit-dot" style="background:#ec4899;width:.4rem;height:.4rem;opacity:.7"></div>
+              </div>
+
+              <!-- Glowing aura behind the circle -->
+              <div style="position:absolute;inset:0;border-radius:50%;background:#ec4899;
+                          filter:blur(1.5rem);opacity:0.15;
+                          animation:pulse-aura 3s ease-in-out infinite;
+                          animation-delay:1.4s;pointer-events:none"></div>
+
+              <!-- Radial progress SVG -->
+              <svg class="radial-svg" width="160" height="160" viewBox="0 0 100 100">
+                <circle class="radial-bg" cx="50" cy="50" r="45"/>
+                <circle class="radial-fill" cx="50" cy="50" r="45"
+                  stroke="#ec4899"
+                  data-offset="42.45"
+                  style="stroke-dashoffset:283.0"/>
+              </svg>
+
+              <!-- Icon + percentage in the center -->
+              <div class="radial-center">
+                <div class="radial-icon-wrap" style="background:#ec4899">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#fff"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>/>
+                  </svg>
+                </div>
+                <div class="radial-pct grad-text" data-target="85">0%</div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Skill name and description below the circle -->
+          <div class="soft-name">Leadership</div>
+          <div class="soft-desc">Guiding teams to ship great work</div>
+        </div>
+        <!-- Fast Learner skill card -->
+        <div class="soft-card" style="transition-delay:0.6s">
+          <div class="soft-float" style="animation-duration:3.3s;animation-delay:1.5s">
+            <div class="radial-wrap">
+
+              <!-- Spinning orbit ring 1 -->
+              <div class="orbit" style="animation-duration:20s">
+                <div class="orbit-dot" style="background:#96054d;box-shadow:0 0 10px #96054d"></div>
+              </div>
+              <!-- Spinning orbit ring 2 (counter-rotate) -->
+              <div class="orbit orbit2" style="animation-duration:24s">
+                <div class="orbit-dot" style="background:#96054d;width:.4rem;height:.4rem;opacity:.7"></div>
+              </div>
+
+              <!-- Glowing aura behind the circle -->
+              <div style="position:absolute;inset:0;border-radius:50%;background:#96054d;
+                          filter:blur(1.5rem);opacity:0.15;
+                          animation:pulse-aura 3s ease-in-out infinite;
+                          animation-delay:2.1s;pointer-events:none"></div>
+
+              <!-- Radial progress SVG -->
+              <svg class="radial-svg" width="160" height="160" viewBox="0 0 100 100">
+                <circle class="radial-bg" cx="50" cy="50" r="45"/>
+                <circle class="radial-fill" cx="50" cy="50" r="45"
+                  stroke="#96054d"
+                  data-offset="2.83"
+                  style="stroke-dashoffset:283.0"/>
+              </svg>
+
+              <!-- Icon + percentage in the center -->
+              <div class="radial-center">
+                <div class="radial-icon-wrap" style="background:#96054d">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#fff"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>/>
+                  </svg>
+                </div>
+                <div class="radial-pct grad-text" data-target="99">0%</div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Skill name and description below the circle -->
+          <div class="soft-name">Fast Learner</div>
+          <div class="soft-desc">Easily follows instructions and executes it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+@keyframes pulse-aura{0%,100%{transform:scale(1);opacity:.25}50%{transform:scale(1.08);opacity:.5}}
+</style>
+
+
+
+<!-- ════════════════ WORKSPACE ════════════════ -->
+<section id="workspace" class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2><span class="grad-text">What's in my bag?</span></h2>
+      <p>Hover or tap the bag &mdash; hover any icon to see details</p>
+    </div>
+    <div class="bag-stage" id="bagStage">
+
+      <a class="workspace-item" data-x="-40" data-y="-40" href="#" target="_blank" style="--wi-delay:0ms;--wi-dur:2.2s;--wi-phase:0.0s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#7B2FBE,#00C4CC)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="cg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7B2FBE"/><stop offset="100%" stop-color="#00C4CC"/></linearGradient></defs><rect width="48" height="48" fill="url(#cg)"/><path d="M31 17.5c-1.8-3.5-5.3-5.9-9.3-5.9C15.2 11.6 10 17.2 10 24s5.2 12.4 11.7 12.4c4 0 7.5-2.1 9.3-5.4" stroke="#fff" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#7B2FBE"></span></span></div>
+          <div class="wi-tooltip"><strong>Canva</strong><br><span class="wi-handle">Design</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="-20" data-y="-44" href="#" target="_blank" style="--wi-delay:55ms;--wi-dur:2.3s;--wi-phase:0.43s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#444,#111)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="#000"/><polygon points="13,10 33,19.5 13,19.5" fill="#fff"/><polygon points="13,27.5 33,37 13,37" fill="#fff"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#444"></span></span></div>
+          <div class="wi-tooltip"><strong>CapCut</strong><br><span class="wi-handle">Video Editing</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="0" data-y="-46" href="https://docs.google.com" target="_blank" style="--wi-delay:110ms;--wi-dur:2.4s;--wi-phase:0.86s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#4285F4,#1a5db8)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M9 4h20l10 10v30a2 2 0 01-2 2H9a2 2 0 01-2-2V6a2 2 0 012-2z" fill="#4285F4"/><path d="M29 4v10h10" fill="#2563EB"/><rect x="12" y="24" width="24" height="3" rx="1.5" fill="#fff"/><rect x="12" y="31" width="24" height="3" rx="1.5" fill="#fff"/><rect x="12" y="38" width="16" height="3" rx="1.5" fill="#fff"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#4285F4"></span></span></div>
+          <div class="wi-tooltip"><strong>Google Docs</strong><br><span class="wi-handle">Writing</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="20" data-y="-44" href="https://sheets.google.com" target="_blank" style="--wi-delay:165ms;--wi-dur:2.5s;--wi-phase:1.29s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#0F9D58,#0a7040)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M9 4h20l10 10v30a2 2 0 01-2 2H9a2 2 0 01-2-2V6a2 2 0 012-2z" fill="#0F9D58"/><path d="M29 4v10h10" fill="#0a7a44"/><rect x="12" y="22" width="11" height="9" rx="1" fill="#fff"/><rect x="25" y="22" width="11" height="9" rx="1" fill="#fff"/><rect x="12" y="33" width="11" height="9" rx="1" fill="#fff"/><rect x="25" y="33" width="11" height="9" rx="1" fill="#fff"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#0F9D58"></span></span></div>
+          <div class="wi-tooltip"><strong>Google Sheets</strong><br><span class="wi-handle">Data</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="40" data-y="-40" href="https://drive.google.com" target="_blank" style="--wi-delay:220ms;--wi-dur:2.6s;--wi-phase:1.72s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#FBBC04,#EA4335)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="#fff"/><polygon points="24,5 45,41 3,41" fill="#FBBC04"/><polygon points="3,41 14.5,21.5 24,38" fill="#EA4335"/><polygon points="45,41 33.5,21.5 24,38" fill="#34A853"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#FBBC04"></span></span></div>
+          <div class="wi-tooltip"><strong>Google Drive</strong><br><span class="wi-handle">Storage</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="-46" data-y="-15" href="#" target="_blank" style="--wi-delay:275ms;--wi-dur:2.7s;--wi-phase:0.05s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#2B579A,#1e40af)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="6" fill="#2B579A"/><path d="M10 15h6l4 14 4-10 4 10 4-14h6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#2B579A"></span></span></div>
+          <div class="wi-tooltip"><strong>MS Word</strong><br><span class="wi-handle">Documents</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="-46" data-y="0" href="#" target="_blank" style="--wi-delay:330ms;--wi-dur:2.8s;--wi-phase:0.48s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#217346,#15803d)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="6" fill="#217346"/><line x1="14" y1="14" x2="34" y2="34" stroke="#fff" stroke-width="5" stroke-linecap="round"/><line x1="34" y1="14" x2="14" y2="34" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#217346"></span></span></div>
+          <div class="wi-tooltip"><strong>MS Excel</strong><br><span class="wi-handle">Spreadsheets</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="-46" data-y="15" href="#" target="_blank" style="--wi-delay:385ms;--wi-dur:2.9s;--wi-phase:0.91s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#B7472A,#c2410c)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="6" fill="#B7472A"/><rect x="8" y="12" width="32" height="24" rx="3" fill="none" stroke="#fff" stroke-width="2.5"/><polygon points="20,18 32,24 20,30" fill="#fff"/><line x1="18" y1="38" x2="30" y2="38" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="36" x2="24" y2="44" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#B7472A"></span></span></div>
+          <div class="wi-tooltip"><strong>MS PowerPoint</strong><br><span class="wi-handle">Slides</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="-40" data-y="40" href="#" target="_blank" style="--wi-delay:440ms;--wi-dur:2.2s;--wi-phase:1.34s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#2D8CFF,#1d4ed8)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="8" fill="#2D8CFF"/><rect x="5" y="13" width="26" height="22" rx="4" fill="#fff"/><path d="M31 19l12-6v22l-12-6z" fill="#fff"/><circle cx="18" cy="24" r="5" fill="#2D8CFF"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#2D8CFF"></span></span></div>
+          <div class="wi-tooltip"><strong>Zoom</strong><br><span class="wi-handle">Video Calls</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="-20" data-y="44" href="#" target="_blank" style="--wi-delay:495ms;--wi-dur:2.3s;--wi-phase:1.77s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#00832D,#0d9488)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="8" fill="#fff"/><rect x="5" y="10" width="13" height="14" rx="2" fill="#0066DA"/><rect x="18" y="10" width="13" height="14" rx="2" fill="#00832D"/><rect x="5" y="24" width="13" height="14" rx="2" fill="#00832D"/><rect x="18" y="24" width="13" height="14" rx="2" fill="#EA4335"/><path d="M31 17.5l12-6v25l-12-6z" fill="#00832D"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#00832D"></span></span></div>
+          <div class="wi-tooltip"><strong>Google Meet</strong><br><span class="wi-handle">Meetings</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="0" data-y="46" href="#" target="_blank" style="--wi-delay:550ms;--wi-dur:2.4s;--wi-phase:0.1s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#444,#111)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="6" fill="#fff"/><path d="M12 10h6l20 26V14h5v24h-6L17 12v22h-5z" fill="#000" stroke="none"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#444"></span></span></div>
+          <div class="wi-tooltip"><strong>Notion</strong><br><span class="wi-handle">Notes</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="20" data-y="44" href="#" target="_blank" style="--wi-delay:605ms;--wi-dur:2.5s;--wi-phase:0.53s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#001E36,#0369a1)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="6" fill="#001E36"/><text x="24" y="31" text-anchor="middle" dominant-baseline="auto" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="18" fill="#31A8FF">Ps</text></svg><span class="wi-dot"><span class="wi-ping" style="background:#001E36"></span></span></div>
+          <div class="wi-tooltip"><strong>Adobe Photoshop</strong><br><span class="wi-handle">Photo Editing</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="40" data-y="40" href="#" target="_blank" style="--wi-delay:660ms;--wi-dur:2.6s;--wi-phase:0.96s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#0D0D0D,#6060C0)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="6" fill="#0D0D0D"/><text x="24" y="31" text-anchor="middle" dominant-baseline="auto" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="18" fill="#9999FF">Pr</text></svg><span class="wi-dot"><span class="wi-ping" style="background:#0D0D0D"></span></span></div>
+          <div class="wi-tooltip"><strong>Adobe Premiere</strong><br><span class="wi-handle">Video Editing</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="46" data-y="-20" href="https://www.facebook.com/nssh.mch/" target="_blank" style="--wi-delay:715ms;--wi-dur:2.7s;--wi-phase:1.39s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#1877F2,#0d5bbf)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="10" fill="#1877F2"/><path d="M29 48V30h6.5l1-8H29v-4.5c0-2.2 1.1-3.5 4.5-3.5H36V7s-3.5-.5-7-.5C24 6.5 20 10 20 16.5V22h-7v8h7v18h9z" fill="#fff"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#1877F2"></span></span></div>
+          <div class="wi-tooltip"><strong>Facebook</strong><br><span class="wi-handle">@nssh.mch</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="46" data-y="-7" href="https://www.instagram.com/nssh_mch/" target="_blank" style="--wi-delay:770ms;--wi-dur:2.8s;--wi-phase:1.82s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#C22B8E,#F04E3C)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ig" cx="28%" cy="108%" r="130%"><stop offset="0%" stop-color="#FED373"/><stop offset="12%" stop-color="#F6A330"/><stop offset="32%" stop-color="#F04E3C"/><stop offset="52%" stop-color="#C22B8E"/><stop offset="78%" stop-color="#7130BC"/><stop offset="100%" stop-color="#4859CA"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#ig)"/><rect x="9" y="9" width="30" height="30" rx="9" stroke="#fff" stroke-width="3" fill="none"/><circle cx="24" cy="24" r="8" stroke="#fff" stroke-width="3" fill="none"/><circle cx="34" cy="14" r="2.5" fill="#fff"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#C22B8E"></span></span></div>
+          <div class="wi-tooltip"><strong>Instagram</strong><br><span class="wi-handle">@nssh_mch</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="46" data-y="7" href="https://www.linkedin.com/in/nissih-michaelah-c-buctuan-85402a3b4/" target="_blank" style="--wi-delay:825ms;--wi-dur:2.9s;--wi-phase:0.15s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#0077B5,#005885)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="8" fill="#0077B5"/><rect x="8" y="20" width="9" height="20" rx="1" fill="#fff"/><circle cx="12.5" cy="12.5" r="5" fill="#fff"/><path d="M23 20h8c4.4 0 8 3.6 8 8v12h-9V29c0-2.8-2-4-3.5-4S23 26.2 23 29v11h-9V20h9z" fill="#fff"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#0077B5"></span></span></div>
+          <div class="wi-tooltip"><strong>LinkedIn</strong><br><span class="wi-handle">Nissih Buctuan</span></div>
+        </div>
+      </a>
+      <a class="workspace-item" data-x="46" data-y="20" href="https://github.com/euno-ia" target="_blank" style="--wi-delay:880ms;--wi-dur:2.2s;--wi-phase:0.58s">
+        <div class="wi-float">
+          <div class="wi-glow" style="background:radial-gradient(circle,#24292E,#374151)"></div>
+          <div class="wi-btn"><svg class="wi-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="10" fill="#24292E"/><path d="M24 7C14.6 7 7 14.6 7 24c0 7.5 4.9 13.9 11.6 16.2.9.2 1.2-.4 1.2-.8v-2.9c-4.8 1-5.8-2.3-5.8-2.3-.8-2-1.9-2.5-1.9-2.5-1.6-1.1.1-1 .1-1 1.7.1 2.6 1.8 2.6 1.8 1.5 2.6 4 1.9 5 1.4.2-1.1.6-1.9 1.1-2.3-3.8-.4-7.8-1.9-7.8-8.6 0-1.9.7-3.4 1.8-4.6-.2-.4-.8-2.2.2-4.7 0 0 1.4-.4 4.7 1.8 1.4-.4 2.8-.6 4.3-.6 1.4 0 2.9.2 4.3.6 3.2-2.2 4.7-1.8 4.7-1.8 1 2.5.4 4.3.2 4.7 1.1 1.2 1.8 2.7 1.8 4.6 0 6.7-4 8.1-7.9 8.6.6.5 1.2 1.6 1.2 3.2v4.7c0 .5.3 1 1.2.8C36.1 37.9 41 31.5 41 24 41 14.6 33.4 7 24 7z" fill="#fff"/></svg><span class="wi-dot"><span class="wi-ping" style="background:#24292E"></span></span></div>
+          <div class="wi-tooltip"><strong>GitHub</strong><br><span class="wi-handle">@euno-ia</span></div>
+        </div>
+      </a>
+
+      <!-- Bag button -->
+      <button class="bag-btn" id="bagBtn" aria-label="Open bag">
+        <svg class="bag-svg" viewBox="0 0 200 220">
+          <defs>
+            <linearGradient id="bagBody" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+            <linearGradient id="bagFlap" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+          </defs>
+          <path d="M 50 80 Q 100 10 150 80" stroke="url(#bagBody)" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <rect x="35" y="80" width="130" height="110" rx="14" fill="url(#bagBody)"/>
+          <rect x="35" y="80" width="14" height="110" rx="14" fill="rgba(255,255,255,0.12)"/>
+          <g id="bagFlap" class="bag-flap">
+            <path d="M 35 95 Q 35 80 49 80 L 151 80 Q 165 80 165 95 L 165 130 Q 100 145 35 130 Z" fill="url(#bagFlap)"/>
+            <circle cx="100" cy="125" r="5" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+          </g>
+        </svg>
+      </button>
+
+      <!-- hint arrow -->
+      <div class="bag-hint glass bag-hint-pill" id="bagHint">&#128073; What&#39;s in my bag?</div>
+      <button class="bag-close-hint glass" id="bagCloseHint">&#10024; Tap to pack it back up</button>
+    </div>
+
+    <div class="workspace-legend">
+      <span style="display:flex;align-items:center;gap:.5rem">
+        <span class="legend-dot" style="background:var(--accent-primary);animation:ping 1.2s ease-out infinite"></span>
+        Tools I use daily
+      </span>
+      <span style="display:flex;align-items:center;gap:.5rem">
+        <span class="legend-dot" style="background:linear-gradient(135deg,#1877F2,#C22B8E)"></span>
+        My socials &mdash; click to visit
+      </span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-heading"><h2><span class="grad-text">Get In Touch</span></h2><p>Let's work together on your next project</p></div>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <h3>Let's Talk</h3>
+        <p style="margin-top:.75rem">I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+        <div class="contact-links" style="margin-top:2rem">
+          <a href="mailto:nmcbuctuan@nemsu.edu.ph" class="contact-link glass">
+            <div class="contact-link-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></div>
+            <div><div class="info-label">Email</div><div class="info-val">nmcbuctuan@nemsu.edu.ph</div></div>
+          </a>
+          <a href="tel:(+63) 954 237 3715" class="contact-link glass">
+            <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+            <div><div class="info-label">Phone</div><div class="info-val">(+63) 954 237 3715</div></div>
+          </a>
+          <div class="contact-link glass">
+            <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="info-label">Location</div><div class="info-val">Cantilan Surigao del Sur</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in contact-form glass">
+        <div class="form-group"><label for="fname">Name</label><input type="text" id="fname" name="name" placeholder="Your name" required/></div>
+        <div class="form-group"><label for="femail">Email</label><input type="email" id="femail" name="email" placeholder="your.email@example.com" required/></div>
+        <div class="form-group"><label for="fmsg">Message</label><textarea id="fmsg" name="message" placeholder="Tell me about your project..." required></textarea></div>
+        <button class="submit-btn" id="submitBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
+        <div class="form-msg" id="formMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-socials">
+      <a href="https://github.com/euno-ia" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/nissih-michaelah-c-buctuan-85402a3b4/" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://www.instagram.com/nssh_mch/" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.facebook.com/nssh.mch/" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+    </div>
+    <div class="footer-copy">Made with <span class="heart">❤</span> by Nissih Buctuan</div>
+    <div class="footer-year">© <span id="footerYear"></span> All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- Back to top button -->
+<button id="back-to-top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- ════════════════════════════════════════════════════
+     RESUME / CV MODAL
+     ─────────────────────────────────────────────────────
+     HOW TO LINK YOUR RESUME:
+       1. Save your resume as a PDF file
+       2. Place it in the same folder as this HTML file
+          and name it: resume.pdf
+       3. The Download and Open buttons below will work automatically.
+
+     If you want a different filename, change "resume.pdf" in
+     both <a href="..."> links below.
+════════════════════════════════════════════════════ -->
+<div id="resumeModal" style="display:none;position:fixed;inset:0;z-index:9000;align-items:center;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)">
+  <div class="resume-box" style="position:relative">
+    <button class="resume-close-x" onclick="closeResume()" aria-label="Close">&#10005;</button>
+    <div style="font-size:3.2rem;margin-bottom:.75rem">&#128196;</div>
+    <h3 class="grad-text">My Resume</h3>
+    <p>Download or view my full resume &mdash; experience, education &amp; skills all in one place.</p>
+    <div class="resume-btns">
+
+      <!-- ▼ DOWNLOAD BUTTON: change "resume.pdf" to your actual filename -->
+      <a href="resume.pdf" download="Nissih_Buctuan_Resume.pdf"
+         class="btn btn-primary" style="text-decoration:none">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download PDF
+      </a>
+
+      <!-- ▼ OPEN IN BROWSER BUTTON: same filename here -->
+      <a href="resume.pdf" target="_blank"
+         class="btn btn-secondary" style="text-decoration:none">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        Open in Browser
+      </a>
+
+    </div>
+    
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     All scripts are in script.js
+     If you want one file only, move the
+     contents of script.js into a <script>
+     tag here.
+═══════════════════════════════════ -->
+<script src="script.js"></script>
+
+<style id="grid-fix">
+/* ════════════════════════════════════════════════
+   PROJECT GRID FIX — uniform 3-column layout
+   with consistent card heights so nothing misaligns
+════════════════════════════════════════════════ */
+
+.projects-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.5rem !important;
+  align-items: stretch !important;
+  perspective: 1400px !important;
+}
+
+/* Each card — layered panel: preview “studio” strip + dark body + polish */
+.project-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  transform-style: preserve-3d !important;
+  backface-visibility: hidden !important;
+  border-radius: 1.05rem !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  isolation: isolate !important;
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--glass-bg) 92%, #fff) 0%,
+    var(--glass-bg) 48%,
+    color-mix(in srgb, var(--bg-tertiary) 35%, var(--glass-bg)) 100%
+  ) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(15, 23, 42, 0.04),
+    0 4px 6px -2px rgba(15, 23, 42, 0.06),
+    0 18px 42px -12px rgba(15, 23, 42, 0.14) !important;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.45, 0.64, 1),
+    box-shadow 0.4s ease,
+    border-color 0.35s ease !important;
+}
+html.dark .project-card {
+  background: linear-gradient(
+    168deg,
+    color-mix(in srgb, var(--glass-bg) 88%, var(--bg-secondary)) 0%,
+    color-mix(in srgb, var(--bg-secondary) 55%, var(--glass-bg)) 55%,
+    var(--bg-tertiary) 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 6px 14px -4px rgba(0, 0, 0, 0.45),
+    0 22px 48px -14px rgba(0, 0, 0, 0.55) !important;
+}
+.project-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(-3.5deg) !important;
+  border-color: color-mix(in srgb, var(--accent-primary) 38%, var(--glass-border)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 25%, transparent),
+    0 12px 28px -6px rgba(59, 130, 246, 0.25),
+    0 28px 56px -12px rgba(0, 0, 0, 0.35) !important;
+}
+html.dark .project-card:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 35%, transparent),
+    0 14px 36px -4px rgba(96, 165, 250, 0.2),
+    0 32px 64px -14px rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Preview area — bright “stage” for screenshots */
+.proj-img-wrap {
+  width: 100% !important;
+  height: 200px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+  border-radius: 0.95rem 0.95rem 0 0 !important;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    color-mix(in srgb, var(--bg-tertiary) 25%, #f8fafc) 100%
+  ) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.75),
+    inset 0 -8px 24px rgba(15, 23, 42, 0.04) !important;
+}
+html.dark .proj-img-wrap {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #f8fafc 12%, var(--bg-tertiary)) 0%,
+    var(--bg-secondary) 55%,
+    var(--bg-tertiary) 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -12px 32px rgba(0, 0, 0, 0.25) !important;
+}
+.project-card:hover .proj-img-wrap {
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.85),
+    inset 0 -8px 28px rgba(59, 130, 246, 0.08),
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 22%, transparent) !important;
+}
+html.dark .project-card:hover .proj-img-wrap {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -10px 28px rgba(0, 0, 0, 0.3),
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 28%, transparent) !important;
+}
+.proj-img-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
+  transition: transform .4s ease !important;
+}
+.project-card:hover .proj-img-wrap img {
+  transform: scale(1.06) !important;
+}
+
+/* Text block — subtle separation from preview */
+.proj-info {
+  padding: 1.1rem 1.2rem 1.2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.55rem !important;
+  flex: 1 !important;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg-tertiary) 22%, transparent) 0%,
+    transparent 55%
+  ) !important;
+}
+html.dark .proj-info {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.18) 0%,
+    transparent 60%
+  ) !important;
+}
+.proj-info h3 {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+}
+.proj-info p {
+  font-size: 0.8rem !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.tag-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.4rem !important;
+  margin-top: auto !important;
+  padding-top: 0.35rem !important;
+}
+.tag {
+  padding: 0.22rem 0.62rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  color: var(--accent-primary) !important;
+  background: color-mix(in srgb, var(--accent-primary) 10%, var(--bg-tertiary)) !important;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 22%, var(--border-color)) !important;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
+}
+.tag:hover {
+  transform: translateY(-1px) !important;
+  background: color-mix(in srgb, var(--accent-primary) 16%, var(--bg-tertiary)) !important;
+}
+
+/* Overlay on hover */
+.proj-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(
+    165deg,
+    rgba(15, 23, 42, 0.1) 0%,
+    rgba(15, 23, 42, 0.55) 100%
+  ) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  backdrop-filter: blur(1px) !important;
+}
+.project-card:hover .proj-overlay {
+  opacity: 1 !important;
+}
+.proj-link {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,.15) !important;
+  backdrop-filter: blur(6px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background .2s, transform .2s !important;
+}
+.proj-link:hover {
+  background: var(--accent-primary) !important;
+  transform: scale(1.15) !important;
+}
+.proj-link svg {
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  stroke: #fff !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* Responsive: 2 col on tablet, 1 col on mobile */
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .projects-panel {
+    padding: 1.35rem 1.25rem 1.5rem !important;
+  }
+}
+@media (max-width: 560px) {
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .projects-panel {
+    padding: 1.1rem 1rem 1.25rem !important;
+    border-radius: 1rem !important;
+  }
+}
+</style>
+
+</body>
+</html>
