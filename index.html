@@ -1,35 +1,17 @@
 <!DOCTYPE html>
-<!--
-╔══════════════════════════════════════════════════════════════╗
-║          Nissih Buctuan — Portfolio (Standalone HTML)        ║
-║                                                              ║
-║  HOW TO PERSONALISE THIS FILE                                ║
-║  ────────────────────────────                                ║
-║  • Profile photo  →  replace "me.jpg" in the same folder    ║
-║  • Resume / CV    →  place "resume.pdf" in the same folder   ║
-║                       (see the RESUME MODAL section below)   ║
-║  • Project images →  put PNG/JPG files in an images/ folder  ║
-║                       and update the src="..." attributes    ║
-║  • Personal data  →  search for "EDIT:" comments below       ║
-║  • Colors         →  edit the :root { } CSS variables        ║
-╚══════════════════════════════════════════════════════════════╝
--->
 <html lang="en" class="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-<!-- EDIT: Page title shown in browser tab -->
+
 <title>Nissih Buctuan | Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init({ publicKey: 'cfhXiG2q-YWf1VE61' });</script>
 
-<!-- ═══════════════════════════════════
-     All styles are in style.css
-     If you want one file only, move the
-     contents of style.css into a <style>
-     tag here.
-═══════════════════════════════════ -->
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -41,10 +23,6 @@
   <div class="bg-atmosphere__mesh"></div>
 </div>
 
-<!-- ════════════════════════════════════════════
-     PRELOADER — shown while page loads
-════════════════════════════════════════════ -->
-<!-- PRELOADER — shown while page loads -->
 <div id="preloader">
   <h1 class="grad-text">Nissih Buctuan</h1>
   <div id="pre-bar-wrap"><div id="pre-bar"></div></div>
@@ -59,7 +37,7 @@
 <!-- ════════════════ NAVBAR ════════════════ -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a class="nav-logo grad-text" href="#home">NB</a>
+    <a class="nav-logo grad-text" href="#home">Nissih</a>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -87,7 +65,7 @@
   <canvas id="particle-canvas"></canvas>
   <div class="hero-inner">
     <div class="hero-text fade-in">
-      <p class="hero-greeting">Hi, I'm</p>
+      <h3 class="hero-greeting">Hi, I am</h3>
       <h1 class="hero-name-heading"><span class="grad-text">Nissih Buctuan</span></h1>
       <div class="typing-wrap"><span id="typing-text"></span><span class="cursor">|</span></div>
       <div class="hero-btns">
@@ -167,7 +145,6 @@
     <div class="section-heading"><h2><span class="grad-text">About Me</span></h2><p>Passionate developer and designer crafting digital experiences</p></div>
 
     <div class="about-grid fade-in">
-              <!-- About section profile image with decorative elements -->
         <div class="about-img">
           <!-- Decorative accent orbs -->
           <div class="about-img-deco about-img-deco--tl"></div>
@@ -182,7 +159,7 @@
         </div>
       <div class="about-info">
         <div class="info-row">
-          <div class="info-icon"><!-- map-pin -->
+          <div class="info-icon">
             <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
           <div><div class="info-label">Location</div><div class="info-val">Cantilan Surigao del Sur</div></div>
@@ -191,7 +168,7 @@
           <div class="info-icon"><!-- graduation-cap -->
             <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           </div>
-          <div><div class="info-label">Education</div><div class="info-val">BS Computer Science, North Eatern Mindanao State University</div></div>
+          <div><div class="info-label">Education</div><div class="info-val">BS Computer Science, North Eastern Mindanao State University - Tandag Campus</div></div>
         </div>
         <div class="info-row">
           <div class="info-icon"><!-- mail -->
@@ -205,7 +182,7 @@
           </div>
           <div><div class="info-label">Phone</div><div class="info-val">(+63) 954 237 3715</div></div>
         </div>
-        <p class="about-bio">I’m a Computer Science student who enjoys working behind the scenes to help things run smoothly.Experience in content creation, social media management,ecommerce and administrative support, where I’vehandled scheduling posts, engaging with audiences, and keeping tasks organized.I’m comfortable using digital tools. Excited to support businesses in growing their online presence while providing dependable and organized executive assistance.</p>
+        <p class="about-bio">I am a Computer Science student who enjoys working behind the scenes to help things run smoothly.Experience in content creation, social media management,ecommerce and administrative support, where I’vehandled scheduling posts, engaging with audiences, and keeping tasks organized.I’m comfortable using digital tools. Excited to support businesses in growing their online presence while providing dependable and organized executive assistance.</p>
       </div>
     </div>
 
@@ -316,10 +293,10 @@
           <div class="project-card" data-category="HTML" data-id="1"
                data-title="Activity 1 - Student Poem"
                data-desc="A personal introductory HTML page that displays a student profile image and an original Filipino poem titled Estudyante by Nissih Michaelah C. Buctuan. Uses basic HTML elements like headings, images, line breaks, and inline background styling in a centered layout."
-               data-img="P1.png" data-tags="HTML,Inline Styling,Typography"
+               data-img="/images/P1.png" data-tags="HTML,Inline Styling,Typography"
                data-live="1st_Activity.html" data-github="#">
             <div class="proj-img-wrap">
-              <img src="P1.png" alt="Activity 1" loading="lazy"/>
+              <img src="/images/P1.png" alt="Activity 1" loading="lazy"/>
               <div class="proj-overlay">
                 <a href="1st_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
                   <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -336,10 +313,10 @@
           <div class="project-card" data-category="HTML" data-id="2"
                data-title="Activity 2 - Hobby Info Page"
                data-desc="An HTML page about the hobby of playing guitar. Uses inline CSS for font families, colors, and background highlights."
-               data-img="P2.png" data-tags="HTML,CSS Styling,Text Formatting"
+               data-img="/images/P2.png" data-tags="HTML,CSS Styling,Text Formatting"
                data-live="2nd_Activity.html" data-github="#">
             <div class="proj-img-wrap">
-              <img src="P2.png" alt="Activity 2" loading="lazy"/>
+              <img src="/images/P2.png" alt="Activity 2" loading="lazy"/>
               <div class="proj-overlay">
                 <a href="2nd_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
                   <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -356,10 +333,10 @@
           <div class="project-card" data-category="Table" data-id="3"
                data-title="Activity 3 - Student Grade Report"
                data-desc="A structured HTML table presenting a Student Grade Report across five subjects with Prelim, Midterm, and Final grades."
-               data-img="P3.png" data-tags="HTML,Tables,colspan"
+               data-img="/images/P3.png" data-tags="HTML,Tables,colspan"
                data-live="3rd_Activity.html" data-github="#">
             <div class="proj-img-wrap">
-              <img src="P3.png" alt="Activity 3" loading="lazy"/>
+              <img src="/images/P3.png" alt="Activity 3" loading="lazy"/>
               <div class="proj-overlay">
                 <a href="3rd_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
                   <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -376,10 +353,10 @@
           <div class="project-card" data-category="Table" data-id="4"
                data-title="Activity 4 - Weekly Class Schedule"
                data-desc="An HTML table representing a Weekly Class Schedule from Monday to Friday with time slots and subjects."
-               data-img="P4.png" data-tags="HTML,Tables,Schedule Layout"
+               data-img="/images/P4.png" data-tags="HTML,Tables,Schedule Layout"
                data-live="4th_Activity.html" data-github="#">
             <div class="proj-img-wrap">
-              <img src="P4.png" alt="Activity 4" loading="lazy"/>
+              <img src="/images/P4.png" alt="Activity 4" loading="lazy"/>
               <div class="proj-overlay">
                 <a href="4th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
                   <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -396,10 +373,10 @@
           <div class="project-card" data-category="Table" data-id="5"
                data-title="Activity 5 - Nested Tables"
                data-desc="An HTML exercise demonstrating nested tables with tongue twister phrases inside table cells."
-               data-img="P5.png" data-tags="HTML,Nested Tables,Layout"
+               data-img="/images/P5.png" data-tags="HTML,Nested Tables,Layout"
                data-live="5th_Activity.html" data-github="#">
             <div class="proj-img-wrap">
-              <img src="P5.png" alt="Activity 5" loading="lazy"/>
+              <img src="/images/P5.png" alt="Activity 5" loading="lazy"/>
               <div class="proj-overlay">
                 <a href="5th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
                   <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -416,10 +393,10 @@
           <div class="project-card" data-category="Table" data-id="6"
                data-title="Activity 6 - colspan and rowspan Layout"
                data-desc="An HTML table demonstrating advanced table structure using both colspan and rowspan."
-               data-img="P6.png" data-tags="HTML,colspan,rowspan"
+               data-img="/images/P6.png" data-tags="HTML,colspan,rowspan"
                data-live="6th_Activity.html" data-github="#">
             <div class="proj-img-wrap">
-              <img src="P6.png" alt="Activity 6" loading="lazy"/>
+              <img src="/images/P6.png" alt="Activity 6" loading="lazy"/>
               <div class="proj-overlay">
                 <a href="6th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
                   <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -436,10 +413,10 @@
           <div class="project-card" data-category="HTML" data-id="7"
                data-title="Activity 7 - HTML List Types"
                data-desc="An HTML page demonstrating various list types including unordered and ordered lists with custom markers."
-               data-img="P7.png" data-tags="HTML,Lists,ul and ol"
+               data-img="/images/P7.png" data-tags="HTML,Lists,ul and ol"
                data-live="7th_Activity.html" data-github="#">
             <div class="proj-img-wrap">
-              <img src="P7.png" alt="Activity 7" loading="lazy"/>
+              <img src="/images/P7.png" alt="Activity 7" loading="lazy"/>
               <div class="proj-overlay">
                 <a href="7th_Activity.html" target="_blank" class="proj-link" onclick="event.stopPropagation()">
                   <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -1174,19 +1151,20 @@ html.dark .project-card {
 }
 .project-card:hover {
   transform: translateY(-10px) rotateX(5deg) rotateY(-3.5deg) !important;
-  border-color: color-mix(in srgb, var(--accent-primary) 38%, var(--glass-border)) !important;
+  border-color: color-mix(in srgb, #8b5cf6 55%, var(--glass-border)) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 0 0 1px color-mix(in srgb, var(--accent-primary) 25%, transparent),
-    0 12px 28px -6px rgba(59, 130, 246, 0.25),
-    0 28px 56px -12px rgba(0, 0, 0, 0.35) !important;
+    0 0 0 1px color-mix(in srgb, #8b5cf6 40%, transparent),
+    0 12px 28px -6px rgba(139, 92, 246, 0.45),
+    0 28px 56px -12px rgba(139, 92, 246, 0.25) !important;
 }
 html.dark .project-card:hover {
+  border-color: color-mix(in srgb, #a78bfa 55%, var(--glass-border)) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 0 0 1px color-mix(in srgb, var(--accent-primary) 35%, transparent),
-    0 14px 36px -4px rgba(96, 165, 250, 0.2),
-    0 32px 64px -14px rgba(0, 0, 0, 0.65) !important;
+    0 0 0 1px color-mix(in srgb, #a78bfa 45%, transparent),
+    0 14px 36px -4px rgba(167, 139, 250, 0.45),
+    0 32px 64px -14px rgba(139, 92, 246, 0.35) !important;
 }
 
 /* Preview area — bright “stage” for screenshots */
@@ -1221,14 +1199,14 @@ html.dark .proj-img-wrap {
 .project-card:hover .proj-img-wrap {
   box-shadow:
     inset 0 2px 4px rgba(255, 255, 255, 0.85),
-    inset 0 -8px 28px rgba(59, 130, 246, 0.08),
-    0 0 0 1px color-mix(in srgb, var(--accent-primary) 22%, transparent) !important;
+    inset 0 -8px 28px rgba(139, 92, 246, 0.12),
+    0 0 0 1px color-mix(in srgb, #8b5cf6 28%, transparent) !important;
 }
 html.dark .project-card:hover .proj-img-wrap {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -10px 28px rgba(0, 0, 0, 0.3),
-    0 0 0 1px color-mix(in srgb, var(--accent-primary) 28%, transparent) !important;
+    inset 0 -10px 28px rgba(139, 92, 246, 0.18),
+    0 0 0 1px color-mix(in srgb, #a78bfa 35%, transparent) !important;
 }
 .proj-img-wrap img {
   width: 100% !important;
