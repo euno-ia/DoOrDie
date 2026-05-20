@@ -298,10 +298,14 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const f = btn.dataset.filter;
-    document.querySelectorAll('.project-card').forEach((card, i) => {
-      const show = f==='All' || card.dataset.category===f;
-      card.classList.toggle('hidden', !show);
-      if(show){ card.style.transitionDelay = (i*.1)+'s'; card.classList.remove('visible'); setTimeout(() => card.classList.add('visible'), 50); }
+    document.querySelectorAll('.project-card').forEach(card => {
+      const show = f === 'All' || card.dataset.category === f;
+      if (show) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+        card.classList.remove('visible');
+      }
     });
   });
 });
@@ -415,34 +419,57 @@ function openResume(){const m=document.getElementById('resumeModal');m.style.dis
 function closeResume(){const m=document.getElementById('resumeModal');m.style.display='none';}
 document.getElementById('resumeModal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeResume(); });
 
-// ── Contact form ───────────────────────────────
+// ── Contact form (EmailJS) ──────────────────────
 document.getElementById('submitBtn').addEventListener('click', () => {
   const name    = document.getElementById('fname').value.trim();
   const email   = document.getElementById('femail').value.trim();
   const message = document.getElementById('fmsg').value.trim();
   const msgEl   = document.getElementById('formMsg');
-  msgEl.className = 'form-msg';
+  const btn     = document.getElementById('submitBtn');
 
-  // Validate all fields are filled
+  msgEl.className = 'form-msg';
+  msgEl.style.display = 'none';
+
   if (!name || !email || !message) {
     msgEl.className = 'form-msg error';
-    msgEl.textContent = 'All fields are required.';
+    msgEl.textContent = 'Please fill in all fields before sending.';
+    msgEl.style.display = 'block';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msgEl.className = 'form-msg error';
+    msgEl.textContent = 'Please enter a valid email address.';
     msgEl.style.display = 'block';
     return;
   }
 
-  // Opens user's email app pre-filled — works in standalone HTML without a server
-  const subject = encodeURIComponent('Portfolio Contact from ' + name);
-  const body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
-  window.location.href = 'mailto:nmcbuctuan@nemsu.edu.ph?subject=' + subject + '&body=' + body;
+  const originalHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
 
-  // Show success message
-  msgEl.className = 'form-msg success';
-  msgEl.textContent = 'Your email app should open now. Thank you for reaching out!';
-  msgEl.style.display = 'block';
-  document.getElementById('fname').value = '';
-  document.getElementById('femail').value = '';
-  document.getElementById('fmsg').value = '';
+  emailjs.send('service_kkrtmnr', 'template_1xanwzp', {
+    from_name:  name,
+    from_email: email,
+    message:    message,
+  })
+  .then(() => {
+    msgEl.className = 'form-msg success';
+    msgEl.textContent = '✅ Message sent! I\'ll get back to you soon.';
+    msgEl.style.display = 'block';
+    document.getElementById('fname').value  = '';
+    document.getElementById('femail').value = '';
+    document.getElementById('fmsg').value   = '';
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
+  })
+  .catch(err => {
+    console.error('EmailJS error:', err);
+    msgEl.className = 'form-msg error';
+    msgEl.textContent = '❌ Something went wrong. Please email me directly at nmcbuctuan@nemsu.edu.ph';
+    msgEl.style.display = 'block';
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
+  });
 });
 
 // ── Back to top ─────────────────────────────────
@@ -886,7 +913,7 @@ document.querySelectorAll('.hero-badge').forEach((b, i) => {
 
   // ── Build dot indicators ──────────────────────────
   function getVisibleCards() {
-    return Array.from(grid.querySelectorAll('.project-card:not([style*="display:none"]):not([style*="display: none"])'));
+    return Array.from(grid.querySelectorAll('.project-card:not(.hidden)'));
   }
 
   let dots = [];
@@ -990,7 +1017,7 @@ document.querySelectorAll('.hero-badge').forEach((b, i) => {
   // ── Re-init on filter change ──────────────────────
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      setTimeout(() => { buildDots(); track.scrollLeft = 0; updateActive(); }, 50);
+      setTimeout(() => { buildDots(); track.scrollLeft = 0; updateActive(); }, 80);
     });
   });
 })();
