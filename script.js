@@ -215,7 +215,7 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(en => { if(en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
 }, {threshold:.15});
 document.querySelectorAll(
-  '.fade-in,.section-heading,.stat-card,.tl-row,.project-card,.exp-card,.skill-cat,.soft-card'
+  '.fade-in,.section-heading,.stat-card,.tl-row,.project-card,.exp-card,.skill-cat,.soft-card,.cert-card'
 ).forEach(el => io.observe(el));
 
 // ── Animated counters ───────────────────────────
@@ -374,11 +374,13 @@ document.querySelectorAll('.project-card').forEach(card => {
   });
 });
 
-document.getElementById('modalClose').addEventListener('click', closeModal);
-modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+if (modal) {
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+}
 
 function closeModal() {
-  modal.classList.remove('open');
+  if (modal) modal.classList.remove('open');
   document.body.style.overflow = '';
 }
 
@@ -886,6 +888,81 @@ document.querySelectorAll('.soft-card').forEach(card => {
     if (wrap) wrap.style.transform = '';
   });
 });
+
+// ── Generic 3D tilt for cards (stats, experience, skills, certificates) ──
+function apply3DTilt(selector, opts = {}) {
+  const strength = opts.strength ?? 10;
+  const lift     = opts.lift ?? 10;
+  document.querySelectorAll(selector).forEach(card => {
+    card.style.willChange = 'transform';
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform =
+        `perspective(900px) rotateY(${x * strength}deg) rotateX(${-y * strength}deg) translateZ(${lift}px) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = card.classList.contains('visible') ? '' : card.style.transform;
+      card.style.transform = '';
+    });
+  });
+}
+apply3DTilt('.stat-card', {strength: 12, lift: 14});
+apply3DTilt('.exp-card',  {strength: 7,  lift: 8});
+apply3DTilt('.skill-cat', {strength: 7,  lift: 8});
+apply3DTilt('.cert-card', {strength: 9,  lift: 10});
+apply3DTilt('.project-card', {strength: 6, lift: 8});
+apply3DTilt('.gallery-card', {strength: 6, lift: 8});
+
+// ── Hero portrait — mouse-tracking 3D tilt + idle float ──
+(() => {
+  const wrap = document.querySelector('.hero-img-wrap');
+  const blob = document.querySelector('.hero-blob');
+  if (!wrap || !blob) return;
+  let floatT = 0;
+  let hovering = false;
+
+  wrap.addEventListener('mousemove', e => {
+    hovering = true;
+    const r = wrap.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    blob.style.transform =
+      `translateY(-10px) rotateX(${-y * 18}deg) rotateY(${x * 18}deg) scale(1.03)`;
+  });
+  wrap.addEventListener('mouseleave', () => { hovering = false; });
+
+  // gentle idle float when not hovering
+  function idleFloat() {
+    if (!hovering) {
+      floatT += 0.015;
+      const fy = Math.sin(floatT) * 6;
+      const rz = Math.sin(floatT * 0.6) * 2;
+      blob.style.transform = `translateY(${fy}px) rotateZ(${rz}deg)`;
+    }
+    requestAnimationFrame(idleFloat);
+  }
+  idleFloat();
+})();
+
+// ── About photo — mouse-tracking 3D tilt ──
+(() => {
+  const wrap  = document.querySelector('.about-img');
+  const inner = document.querySelector('.about-img-inner');
+  if (!wrap || !inner) return;
+  wrap.addEventListener('mousemove', e => {
+    const r = wrap.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    inner.style.transform =
+      `rotateX(${-y * 16}deg) rotateY(${x * 16}deg) translateZ(14px) scale(1.04)`;
+  });
+  wrap.addEventListener('mouseleave', () => { inner.style.transform = ''; });
+})();
+
+// ── Projects CTA card — subtle 3D tilt ──
+apply3DTilt('.projects-cta', {strength: 5, lift: 6});
 
 // ── Hero badge wobble on load ────────────────────────────────────
 document.querySelectorAll('.hero-badge').forEach((b, i) => {
