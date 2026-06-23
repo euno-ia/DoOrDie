@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Projects | Nissih Buctuan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  /* ════════════════════════════════════════════════
+     PROJECTS PAGE — local styles
+  ════════════════════════════════════════════════ */
+  .proj-page-hero{
+    padding:7.5rem 1.5rem 2.5rem;text-align:center;position:relative;
+  }
+  .proj-page-back{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-size:.85rem;font-weight:600;color:var(--text-secondary);
+    text-decoration:none;margin-bottom:1.5rem;
+    padding:.5rem 1rem;border-radius:999px;
+    background:var(--glass-bg);border:1px solid var(--glass-border);
+    transition:color .25s,border-color .25s,transform .2s;
+  }
+  .proj-page-back:hover{color:var(--accent-primary);border-color:color-mix(in srgb,var(--accent-primary) 40%,var(--glass-border));transform:translateX(-3px)}
+  .proj-page-back svg{width:1rem;height:1rem}
+  .proj-page-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin-bottom:.75rem}
+  .proj-page-hero p{color:var(--text-secondary);max-width:520px;margin:0 auto;line-height:1.6}
+
+  /* Tab bar */
+  .tab-bar{
+    display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;
+    margin:0 auto 3rem;padding:0 1.5rem;
+  }
+  .tab-btn{
+    padding:.75rem 1.5rem;border-radius:999px;font-weight:600;font-size:.92rem;
+    background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--text-secondary);
+    cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:.5rem;
+  }
+  .tab-btn svg{width:1.05rem;height:1.05rem}
+  .tab-btn:hover{color:var(--text-primary);border-color:color-mix(in srgb,var(--accent-primary) 35%,var(--glass-border))}
+  .tab-btn.active{background:var(--accent-gradient);color:#fff;border-color:transparent;box-shadow:0 10px 26px -8px color-mix(in srgb,var(--accent-primary) 50%,transparent)}
+
+  .tab-panel{display:none;padding:0 1.5rem 6rem;max-width:1280px;margin:0 auto}
+  .tab-panel.active{display:block;animation:tabFadeIn .45s ease}
+  @keyframes tabFadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Shared grid for graphics + website projects */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  @media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.gallery-grid{grid-template-columns:1fr}}
+
+  .gallery-card{
+    border-radius:1.05rem;overflow:hidden;cursor:pointer;
+    background:linear-gradient(165deg,color-mix(in srgb,var(--glass-bg) 92%,#fff) 0%,var(--glass-bg) 48%,color-mix(in srgb,var(--bg-tertiary) 35%,var(--glass-bg)) 100%);
+    border:1px solid var(--glass-border);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 4px 6px -2px rgba(15,23,42,.06),0 18px 42px -12px rgba(15,23,42,.14);
+    transition:transform .4s cubic-bezier(.34,1.45,.64,1),box-shadow .4s,border-color .35s;
+    display:flex;flex-direction:column;
+    opacity:0;transform:translateY(30px);
+  }
+  .gallery-card.visible{opacity:1;transform:translateY(0);transition:transform .15s ease-out,box-shadow .35s,border-color .35s}
+  .gallery-card:hover{box-shadow:0 16px 40px -10px color-mix(in srgb,var(--accent-primary) 32%,transparent);border-color:color-mix(in srgb,var(--accent-primary) 45%,var(--glass-border))}
+
+  .gallery-img-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(180deg,#fff 0%,color-mix(in srgb,var(--bg-tertiary) 25%,#f8fafc) 100%)}
+  html.dark .gallery-img-wrap{background:linear-gradient(180deg,color-mix(in srgb,#f8fafc 12%,var(--bg-tertiary)) 0%,var(--bg-secondary) 55%,var(--bg-tertiary) 100%)}
+  .gallery-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+  .gallery-card:hover .gallery-img-wrap img{transform:scale(1.06)}
+  .gallery-img-placeholder{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--text-tertiary);text-align:center;padding:1rem}
+  .gallery-img-placeholder svg{width:2.2rem;height:2.2rem;stroke:var(--accent-primary);opacity:.55}
+  .gallery-img-placeholder span{font-size:.72rem;font-weight:600}
+  .gallery-img-empty .gallery-img-placeholder{display:flex}
+  .gallery-overlay{position:absolute;inset:0;background:linear-gradient(165deg,rgba(15,23,42,.1) 0%,rgba(15,23,42,.55) 100%);display:flex;align-items:center;justify-content:center;gap:.6rem;opacity:0;transition:opacity .3s}
+  .gallery-card:hover .gallery-overlay{opacity:1}
+  .gallery-link{width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
+  .gallery-link:hover{background:var(--accent-primary);transform:scale(1.15)}
+  .gallery-link svg{width:1.1rem;height:1.1rem;stroke:#fff}
+
+  .gallery-info{padding:1.1rem 1.2rem 1.25rem;flex:1;display:flex;flex-direction:column;gap:.4rem}
+  .gallery-info h3{font-size:1rem;font-weight:700;color:var(--text-primary);line-height:1.35}
+  .gallery-info p{font-size:.82rem;color:var(--text-secondary);line-height:1.55}
+  .gallery-cat-tag{font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-primary)}
+
+  .gallery-visit-btn{
+    margin-top:auto;align-self:flex-start;
+    display:inline-flex;align-items:center;gap:.4rem;
+    font-size:.8rem;font-weight:600;color:var(--accent-primary);
+    text-decoration:none;padding:.4rem 0;
+  }
+  .gallery-visit-btn svg{width:.95rem;height:.95rem}
+  .gallery-visit-btn:hover{text-decoration:underline}
+
+  /* Coding activities — filter bar reused from old design */
+  .code-filter-bar{display:flex;justify-content:center;gap:.6rem;margin-bottom:2rem;flex-wrap:wrap}
+  .code-filter-btn{
+    padding:.55rem 1.25rem;border-radius:999px;font-size:.82rem;font-weight:600;
+    background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--text-secondary);
+    cursor:pointer;transition:all .2s;
+  }
+  .code-filter-btn:hover{color:var(--text-primary)}
+  .code-filter-btn.active{background:var(--accent-gradient);color:#fff;border-color:transparent}
+
+  .code-card{display:none}
+  .code-card.show{display:flex}
+
+  /* Empty state */
+  .empty-state{text-align:center;padding:4rem 1rem;color:var(--text-tertiary)}
+  .empty-state svg{width:3rem;height:3rem;stroke:var(--accent-primary);opacity:.4;margin-bottom:1rem}
+  .empty-state p{font-size:.95rem}
+
+  /* Modal reused for graphics + code preview */
+  .modal-backdrop{position:fixed;inset:0;z-index:9000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);padding:1.5rem}
+  .modal-backdrop.open{display:flex}
+  .modal-box{position:relative;max-width:680px;width:100%;max-height:88vh;overflow-y:auto;background:var(--bg-secondary);border:1px solid var(--glass-border);border-radius:1.25rem;padding:2rem}
+  .modal-close{position:absolute;top:1rem;right:1rem;width:2.25rem;height:2.25rem;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,color .2s}
+  .modal-close:hover{background:var(--accent-primary);color:#fff}
+  .modal-img{width:100%;border-radius:.85rem;margin-bottom:1.5rem;display:block}
+  .modal-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+  .modal-tag{padding:.25rem .75rem;font-size:.875rem;border-radius:9999px;background:var(--accent-primary);color:#fff}
+  .modal-desc{color:var(--text-secondary);line-height:1.7;margin-bottom:1.5rem}
+  .modal-actions{display:flex;gap:.85rem;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div id="bg-atmosphere" aria-hidden="true">
+  <div class="bg-atmosphere__blob bg-atmosphere__blob--a"></div>
+  <div class="bg-atmosphere__blob bg-atmosphere__blob--b"></div>
+  <div class="bg-atmosphere__blob bg-atmosphere__blob--c"></div>
+  <div class="bg-atmosphere__mesh"></div>
+</div>
+
+<!-- ════════════════ NAVBAR ════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo grad-text" href="index.html#home">Nissih</a>
+    <ul class="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#certificates">Certificates</a></li>
+      <li><a href="projects.html" style="color:var(--accent-primary)">Projects</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#workspace">Workspace</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme">☀️</button>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#home">Home</a><a href="index.html#about">About</a><a href="index.html#certificates">Certificates</a>
+  <a href="projects.html">Projects</a><a href="index.html#experience">Experience</a><a href="index.html#skills">Skills</a>
+  <a href="index.html#workspace">Workspace</a><a href="index.html#contact">Contact</a>
+</div>
+
+<!-- ════════════════ PAGE HERO ════════════════ -->
+<div class="proj-page-hero">
+  <a href="index.html" class="proj-page-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Portfolio
+  </a>
+  <h1><span class="grad-text">My Projects</span></h1>
+  <p>A complete look at my graphic design work, client websites, and coding activities — organized into their own galleries below.</p>
+</div>
+
+<!-- ════════════════ TAB BAR ════════════════ -->
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" data-tab="graphics">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="17" r="2"/><path d="M13.5 9v3l-2 5M13.5 9l4 5"/></svg>
+    Graphics
+  </button>
+  <button class="tab-btn" data-tab="website">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+    Website Projects
+  </button>
+  <button class="tab-btn" data-tab="coding">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    Projects
+  </button>
+</div>
+
+<!-- ════════════════ TAB: GRAPHICS ════════════════ -->
+<div class="tab-panel active" id="panel-graphics">
+  <div class="gallery-grid" id="graphicsGrid">
+
+    <!-- Pods -->
+    <div class="gallery-card" data-title="Pods" data-img="pods.png" data-desc="Graphic design work for a Pods-themed project, focusing on clean layout and brand-consistent visuals." data-tags="Graphic Design,Branding">
+      <div class="gallery-img-wrap">
+        <img src="pods.png" alt="Pods" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="17" r="2"/></svg>
+          <span>Add pods.png</span>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-link" onclick="event.stopPropagation();openGraphicModal(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Graphic Design</span>
+        <h3>Pods</h3>
+        <p>Clean, brand-consistent visual design for a Pods packaging concept.</p>
+      </div>
+    </div>
+
+    <!-- Cafe -->
+    <div class="gallery-card" data-title="Cafe" data-img="cafe.png" data-desc="A graphic design piece created for a cafe brand, balancing warm tones with modern typography." data-tags="Graphic Design,Branding">
+      <div class="gallery-img-wrap">
+        <img src="cafe.png" alt="Cafe" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="17" r="2"/></svg>
+          <span>Add cafe.png</span>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-link" onclick="event.stopPropagation();openGraphicModal(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Graphic Design</span>
+        <h3>Cafe</h3>
+        <p>Warm, modern branding visuals designed for a cafe concept.</p>
+      </div>
+    </div>
+
+    <!-- Candle -->
+    <div class="gallery-card" data-title="Candle" data-img="candle.png" data-desc="Packaging and promotional graphic design for a candle brand, with a soft, elegant aesthetic." data-tags="Graphic Design,Packaging">
+      <div class="gallery-img-wrap">
+        <img src="candle.png" alt="Candle" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="17" r="2"/></svg>
+          <span>Add candle.png</span>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-link" onclick="event.stopPropagation();openGraphicModal(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Graphic Design</span>
+        <h3>Candle</h3>
+        <p>Soft, elegant packaging design created for a candle brand.</p>
+      </div>
+    </div>
+
+    <!-- Tumbler -->
+    <div class="gallery-card" data-title="Tumbler" data-img="tumbler.png" data-desc="A graphic concept designed for tumbler merchandise, featuring bold colors and custom artwork." data-tags="Graphic Design,Merchandise">
+      <div class="gallery-img-wrap">
+        <img src="tumbler.png" alt="Tumbler" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="17" r="2"/></svg>
+          <span>Add tumbler.png</span>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-link" onclick="event.stopPropagation();openGraphicModal(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Graphic Design</span>
+        <h3>Tumbler</h3>
+        <p>Bold, custom artwork designed for tumbler merchandise.</p>
+      </div>
+    </div>
+
+    <!-- Serum -->
+    <div class="gallery-card" data-title="Serum" data-img="serum.png" data-desc="Product label and graphic design for a skincare serum, combining minimalism with a premium feel." data-tags="Graphic Design,Product Label">
+      <div class="gallery-img-wrap">
+        <img src="serum.png" alt="Serum" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="17" r="2"/></svg>
+          <span>Add serum.png</span>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-link" onclick="event.stopPropagation();openGraphicModal(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Graphic Design</span>
+        <h3>Serum</h3>
+        <p>Minimal, premium-feel product label design for a skincare serum.</p>
+      </div>
+    </div>
+
+    <!-- Coffee -->
+    <div class="gallery-card" data-title="Coffee" data-img="coffee.png" data-desc="A graphic design piece for a coffee brand, with rich tones and an inviting, cozy visual identity." data-tags="Graphic Design,Branding">
+      <div class="gallery-img-wrap">
+        <img src="coffee.png" alt="Coffee" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="17" r="2"/></svg>
+          <span>Add coffee.png</span>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-link" onclick="event.stopPropagation();openGraphicModal(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Graphic Design</span>
+        <h3>Coffee</h3>
+        <p>Rich, cozy visual identity created for a coffee brand.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  HOW TO ADD MORE GRAPHICS                                    ║
+  ║  Duplicate a whole .gallery-card block inside #graphicsGrid. ║
+  ║  Replace the data-title, data-img (your image filename),     ║
+  ║  data-desc, and data-tags. Place the matching image file in  ║
+  ║  the same folder as this projects.html.                      ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+</div>
+
+<!-- ════════════════ TAB: WEBSITE PROJECTS ════════════════ -->
+<div class="tab-panel" id="panel-website">
+  <div class="gallery-grid" id="websiteGrid">
+
+    <div class="gallery-card" style="cursor:default">
+      <div class="gallery-img-wrap">
+        <img src="client1.png" alt="Client Website 1" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          <span>Add client1.png</span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Client Website</span>
+        <h3>Client Project Title</h3>
+        <p>A short description of the website built for this client — the goal, the platform, and what makes it stand out.</p>
+        <a href="#" target="_blank" class="gallery-visit-btn">
+          Visit Live Site
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="gallery-card" style="cursor:default">
+      <div class="gallery-img-wrap">
+        <img src="client2.png" alt="Client Website 2" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          <span>Add client2.png</span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Client Website</span>
+        <h3>Client Project Title</h3>
+        <p>A short description of the website built for this client — the goal, the platform, and what makes it stand out.</p>
+        <a href="#" target="_blank" class="gallery-visit-btn">
+          Visit Live Site
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="gallery-card" style="cursor:default">
+      <div class="gallery-img-wrap">
+        <img src="client3.png" alt="Client Website 3" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          <span>Add client3.png</span>
+        </div>
+      </div>
+      <div class="gallery-info">
+        <span class="gallery-cat-tag">Client Website</span>
+        <h3>Client Project Title</h3>
+        <p>A short description of the website built for this client — the goal, the platform, and what makes it stand out.</p>
+        <a href="#" target="_blank" class="gallery-visit-btn">
+          Visit Live Site
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  HOW TO ADD A CLIENT WEBSITE PROJECT                         ║
+  ║  Duplicate a whole .gallery-card block inside #websiteGrid.  ║
+  ║  1. Replace clientN.png with your screenshot filename.       ║
+  ║  2. Update the h3 title and the <p> description.             ║
+  ║  3. Set the href="..." on the "Visit Live Site" link to the  ║
+  ║     client's actual website URL.                             ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+</div>
+
+<!-- ════════════════ TAB: CODING PROJECTS ════════════════ -->
+<div class="tab-panel" id="panel-coding">
+
+  <div class="code-filter-bar" id="codeFilterBar">
+    <button class="code-filter-btn active" data-filter="All">All</button>
+    <button class="code-filter-btn" data-filter="HTML">HTML</button>
+    <button class="code-filter-btn" data-filter="Table">Table</button>
+  </div>
+
+  <div class="gallery-grid" id="codeGrid">
+
+    <div class="gallery-card code-card show" data-category="HTML" data-id="1"
+         data-title="Activity 1 - Student Poem"
+         data-desc="A personal introductory HTML page that displays a student profile image and an original Filipino poem titled Estudyante by Nissih Michaelah C. Buctuan. Uses basic HTML elements like headings, images, line breaks, and inline background styling in a centered layout."
+         data-img="P1.png" data-tags="HTML,Inline Styling,Typography"
+         data-live="1st_Activity.html">
+      <div class="gallery-img-wrap" onclick="openCodeModal(this.closest('.gallery-card'))">
+        <img src="P1.png" alt="Activity 1" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder"><span>Add P1.png</span></div>
+        <div class="gallery-overlay">
+          <a href="1st_Activity.html" target="_blank" class="gallery-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="gallery-info" onclick="openCodeModal(this.closest('.gallery-card'))" style="cursor:pointer">
+        <span class="gallery-cat-tag">HTML</span>
+        <h3>Activity 1 - Student Poem</h3>
+        <p>A personal HTML page featuring a poem about student life with an image and styled text.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card code-card show" data-category="HTML" data-id="2"
+         data-title="Activity 2 - Hobby Info Page"
+         data-desc="An HTML page about the hobby of playing guitar. Uses inline CSS for font families, colors, and background highlights."
+         data-img="P2.png" data-tags="HTML,CSS Styling,Text Formatting"
+         data-live="2nd_Activity.html">
+      <div class="gallery-img-wrap" onclick="openCodeModal(this.closest('.gallery-card'))">
+        <img src="P2.png" alt="Activity 2" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder"><span>Add P2.png</span></div>
+        <div class="gallery-overlay">
+          <a href="2nd_Activity.html" target="_blank" class="gallery-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="gallery-info" onclick="openCodeModal(this.closest('.gallery-card'))" style="cursor:pointer">
+        <span class="gallery-cat-tag">HTML</span>
+        <h3>Activity 2 - Hobby Info Page</h3>
+        <p>A colorful info page about playing guitar using font, color, and background styling.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card code-card show" data-category="Table" data-id="3"
+         data-title="Activity 3 - Student Grade Report"
+         data-desc="A structured HTML table presenting a Student Grade Report across five subjects with Prelim, Midterm, and Final grades."
+         data-img="P3.png" data-tags="HTML,Tables,colspan"
+         data-live="3rd_Activity.html">
+      <div class="gallery-img-wrap" onclick="openCodeModal(this.closest('.gallery-card'))">
+        <img src="P3.png" alt="Activity 3" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder"><span>Add P3.png</span></div>
+        <div class="gallery-overlay">
+          <a href="3rd_Activity.html" target="_blank" class="gallery-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="gallery-info" onclick="openCodeModal(this.closest('.gallery-card'))" style="cursor:pointer">
+        <span class="gallery-cat-tag">Table</span>
+        <h3>Activity 3 - Student Grade Report</h3>
+        <p>A structured HTML table presenting grades across five subjects.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card code-card show" data-category="Table" data-id="4"
+         data-title="Activity 4 - Weekly Class Schedule"
+         data-desc="A weekly timetable HTML table with time slots, subjects, and a lunch break row."
+         data-img="P4.png" data-tags="HTML,Tables,Schedule Layout"
+         data-live="4th_Activity.html">
+      <div class="gallery-img-wrap" onclick="openCodeModal(this.closest('.gallery-card'))">
+        <img src="P4.png" alt="Activity 4" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder"><span>Add P4.png</span></div>
+        <div class="gallery-overlay">
+          <a href="4th_Activity.html" target="_blank" class="gallery-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="gallery-info" onclick="openCodeModal(this.closest('.gallery-card'))" style="cursor:pointer">
+        <span class="gallery-cat-tag">Table</span>
+        <h3>Activity 4 - Weekly Class Schedule</h3>
+        <p>A weekly timetable with time slots, subjects, and a lunch break row.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card code-card show" data-category="Table" data-id="5"
+         data-title="Activity 5 - Nested Tables"
+         data-desc="An HTML exercise demonstrating nested tables with tongue twister phrases inside table cells."
+         data-img="P5.png" data-tags="HTML,Nested Tables,Layout"
+         data-live="5th_Activity.html">
+      <div class="gallery-img-wrap" onclick="openCodeModal(this.closest('.gallery-card'))">
+        <img src="P5.png" alt="Activity 5" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder"><span>Add P5.png</span></div>
+        <div class="gallery-overlay">
+          <a href="5th_Activity.html" target="_blank" class="gallery-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="gallery-info" onclick="openCodeModal(this.closest('.gallery-card'))" style="cursor:pointer">
+        <span class="gallery-cat-tag">Table</span>
+        <h3>Activity 5 - Nested Tables</h3>
+        <p>Nested HTML tables demonstrating tongue twister phrases inside table cells.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card code-card show" data-category="Table" data-id="6"
+         data-title="Activity 6 - colspan and rowspan Layout"
+         data-desc="An HTML table demonstrating advanced table structure using both colspan and rowspan."
+         data-img="P6.png" data-tags="HTML,colspan,rowspan"
+         data-live="6th_Activity.html">
+      <div class="gallery-img-wrap" onclick="openCodeModal(this.closest('.gallery-card'))">
+        <img src="P6.png" alt="Activity 6" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder"><span>Add P6.png</span></div>
+        <div class="gallery-overlay">
+          <a href="6th_Activity.html" target="_blank" class="gallery-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="gallery-info" onclick="openCodeModal(this.closest('.gallery-card'))" style="cursor:pointer">
+        <span class="gallery-cat-tag">Table</span>
+        <h3>Activity 6 - colspan and rowspan Layout</h3>
+        <p>An HTML table using colspan and rowspan to create a complex directional layout.</p>
+      </div>
+    </div>
+
+    <div class="gallery-card code-card show" data-category="HTML" data-id="7"
+         data-title="Activity 7 - HTML List Types"
+         data-desc="An HTML page demonstrating various list types including unordered and ordered lists with custom markers."
+         data-img="P7.png" data-tags="HTML,Lists,ul and ol"
+         data-live="7th_Activity.html">
+      <div class="gallery-img-wrap" onclick="openCodeModal(this.closest('.gallery-card'))">
+        <img src="P7.png" alt="Activity 7" loading="lazy" onerror="this.parentNode.classList.add('gallery-img-empty');this.style.display='none'"/>
+        <div class="gallery-img-placeholder"><span>Add P7.png</span></div>
+        <div class="gallery-overlay">
+          <a href="7th_Activity.html" target="_blank" class="gallery-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="gallery-info" onclick="openCodeModal(this.closest('.gallery-card'))" style="cursor:pointer">
+        <span class="gallery-cat-tag">HTML</span>
+        <h3>Activity 7 - HTML List Types</h3>
+        <p>A page showcasing all HTML list types: unordered, ordered, and custom markers.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════ IMAGE LIGHTBOX (graphics — full image only) ════════════════ -->
+<div class="modal-backdrop" id="lightbox" style="background:rgba(0,0,0,.85)">
+  <button class="modal-close" id="lightboxClose" style="position:fixed;top:1.5rem;right:1.5rem;z-index:10">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="" style="max-width:92vw;max-height:92vh;border-radius:.6rem;object-fit:contain;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)"/>
+</div>
+
+<!-- ════════════════ SHARED MODAL (coding activity previews) ════════════════ -->
+<div class="modal-backdrop" id="previewModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="modal-img" src="" alt="" class="modal-img"/>
+    <h2 id="modal-title" class="grad-text" style="font-size:1.7rem;font-weight:700;margin-bottom:1rem"></h2>
+    <div id="modal-tags" class="modal-tags"></div>
+    <p id="modal-desc" class="modal-desc"></p>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-socials">
+      <a href="https://github.com/euno-ia" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/nissih-michaelah-c-buctuan-85402a3b4/" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://www.instagram.com/nssh_mch/" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.facebook.com/nssh.mch/" target="_blank" class="footer-social glass">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+    </div>
+    <div class="footer-copy">Made with <span class="heart">❤</span> by Nissih Buctuan</div>
+    <div class="footer-year">© <span id="footerYear"></span> All rights reserved.</div>
+  </div>
+</footer>
+
+<button id="back-to-top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  // ── Preloader skip (no preloader on this inner page) ──
+  document.documentElement.classList.toggle('dark', (localStorage.getItem('theme')||'dark')==='dark');
+
+  // ── Theme toggle (shared with main page via localStorage) ──
+  const html = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  function applyTheme(t){ html.classList.toggle('dark', t==='dark'); themeBtn.textContent = t==='dark' ? '☀️' : '🌙'; }
+  let theme = localStorage.getItem('theme') || 'dark';
+  applyTheme(theme);
+  themeBtn.addEventListener('click', () => { theme = theme==='dark' ? 'light' : 'dark'; localStorage.setItem('theme', theme); applyTheme(theme); });
+
+  // ── Navbar scroll effect ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 50), {passive:true});
+
+  // ── Hamburger ──
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+  document.getElementById('mobileMenu').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
+
+  // ── Back to top ──
+  const btt = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => btt.classList.toggle('visible', scrollY > 300), {passive:true});
+  btt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+  // ── Footer year ──
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  // ── Tab switching ──
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels  = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
+      revealCards();
+      window.scrollTo({top: document.getElementById('tabBar').offsetTop - 90, behavior:'smooth'});
+    });
+  });
+
+  // ── Scroll reveal for gallery cards ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); revealObserver.unobserve(en.target); } });
+  }, {threshold:.12});
+  function revealCards(){
+    document.querySelectorAll('.gallery-card:not(.visible)').forEach(c => revealObserver.observe(c));
+  }
+  revealCards();
+
+  // ── Coding activities filter ──
+  document.querySelectorAll('.code-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.code-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.code-card').forEach(card => {
+        const show = f === 'All' || card.dataset.category === f;
+        card.classList.toggle('show', show);
+        if (show) { card.classList.remove('visible'); revealObserver.observe(card); }
+      });
+    });
+  });
+
+  // ── Shared modal logic ──
+  const modal = document.getElementById('previewModal');
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+
+  function fillModal(card, actionsHtml){
+    document.getElementById('modal-img').src = card.dataset.img || '';
+    document.getElementById('modal-title').textContent = card.dataset.title || '';
+    document.getElementById('modal-desc').textContent = card.dataset.desc || '';
+    const tagsEl = document.getElementById('modal-tags');
+    tagsEl.innerHTML = '';
+    (card.dataset.tags || '').split(',').forEach(t => {
+      if (!t.trim()) return;
+      const s = document.createElement('span');
+      s.className = 'modal-tag';
+      s.textContent = t.trim();
+      tagsEl.appendChild(s);
+    });
+    document.getElementById('modal-actions').innerHTML = actionsHtml || '';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // ── Image lightbox (graphics — full image, no extras) ──
+  const lightbox = document.getElementById('lightbox');
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  function closeLightbox(){ lightbox.classList.remove('open'); document.body.style.overflow=''; }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+  });
+
+  function openGraphicModal(cardEl){
+    const card = cardEl.closest('.gallery-card');
+    document.getElementById('lightbox-img').src = card.dataset.img || '';
+    document.getElementById('lightbox-img').alt = card.dataset.title || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Coding activities: open modal with "View Output" action
+  function openCodeModal(card){
+    const liveUrl = card.dataset.live || '#';
+    fillModal(card, `
+      <a href="${liveUrl}" target="_blank" class="btn btn-primary" style="text-decoration:none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Output
+      </a>
+    `);
+  }
+
+  // ── 3D tilt-on-hover for every gallery card ──
+  function apply3DTilt(selector, strength = 7, lift = 8) {
+    document.querySelectorAll(selector).forEach(card => {
+      card.style.willChange = 'transform';
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.transform =
+          `perspective(900px) rotateY(${x * strength}deg) rotateX(${-y * strength}deg) translateZ(${lift}px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+  apply3DTilt('.gallery-card', 7, 9);
+</script>
+
+
+</body>
+</html>
